@@ -2,7 +2,7 @@
 {
     using NServiceBus;
 
-    public class SayHello:ICommand
+    public class SayHello
     {
         public string Message { get; set; }
     }
