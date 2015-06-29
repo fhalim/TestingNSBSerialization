@@ -1,14 +1,23 @@
 ﻿namespace TestingNSBSerialization.Printer
 {
     using System;
-    using Newtonsoft.Json.Linq;
+    using Contracts;
     using NServiceBus;
 
-    public class HelloWriterJObject : IHandleMessages<JObject>
+    public class HelloWriterJObject : IHandleMessages<Object>
     {
-        public void Handle(JObject message)
+        public void Handle(Object message)
         {
-            Console.WriteLine("Received message: {0}", message);
+            var hello = message as SayHello;
+            if (hello != null)
+            {
+                Console.WriteLine("Saying hello to {0}", hello.Message);
+            }
+            else
+            {
+                Console.WriteLine("Received unknown message: {0}", message);
+            }
         }
+
     }
 }
